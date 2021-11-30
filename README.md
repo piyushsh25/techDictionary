@@ -1,0 +1,2 @@
+# techDictionary
+Created with CodeSandbox
