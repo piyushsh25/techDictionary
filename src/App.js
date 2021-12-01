@@ -1,47 +1,96 @@
-import React, { useState } from "react";
 import "./styles.css";
-
-var someTechnologies = {
-  HTML:
-    "The HyperText Markup Language, or HTML is the standard markup language for documents designed to be displayed in a web browser.",
-  CSS:
-    "Cascading Style Sheets is a style sheet language used for describing the presentation of a document written in a markup language such as HTML. C",
-  JS:
-    "JavaScript, often abbreviated as JS, is a programming language that conforms to the ECMAScript specification. JavaScript is high-level, often just-in-time compiled and multi-paradigm.",
-  React:
-    "React is a free and open-source front-end JavaScript library for building user interfaces based on UI components. It is maintained by Meta and a community of individual developers and companies. ",
-  MongoDB:
-    "MongoDB is a source-available cross-platform document-oriented database program. Classified as a NoSQL database program, MongoDB uses JSON-like documents with optional schemas.",
-  SQL:
-    "SQL is a domain-specific language used in programming and designed for managing data held in a relational database management system, or for stream processing in a relational data stream"
+import React, { useState } from "react";
+const list = {
+  novel: [
+    {
+      name: "JENNIFER EGAN ",
+      subjects: "The Top Twenty"
+    },
+    {
+      name: "DAVID MITCHELL ",
+      subjects: "TTHE THOUSAND AUTUMNS OF JACOB DE ZOET  "
+    },
+    {
+      name: "DENIS JOHNSON ",
+      subjects: "DENIS JOHNSON "
+    }
+  ],
+  tech: [
+    {
+      name: " Mar Hicks",
+      subjects: "Programmed Inequality  "
+    },
+    {
+      name: "Michael J Lewis ",
+      subjects: " The New New Thing: A Silicon Valley Story"
+    },
+    {
+      name: "  T.R. Ried",
+      subjects: "The Chip "
+    }
+  ],
+  thriller: [
+    {
+      name: "Lucy Foley ",
+      subjects: "The Guest List  "
+    },
+    {
+      name: "Rachel Caine",
+      subjects: "Stillhouse Lake  "
+    },
+    {
+      name: "Liane Moriarty",
+      subjects: "Nine Perfect Strangers  "
+    }
+  ]
 };
-var techno = Object.keys(someTechnologies);
 
-function App() {
-  const [meaning, setMeaning] = useState("");
-
-  function techHandler(techno) {
-    var meaning = someTechnologies[techno];
-    setMeaning(meaning);
+export default function App() {
+  const [name, functionname] = useState("novel");
+  function toshow(grat) {
+    functionname(grat);
   }
+
   return (
     <div className="App">
-      <h1>Welcome!</h1>
-      <h3> Click to know about these tech</h3>
-      <hr />
-      {techno.map((techno) => {
-        return (
-          <span
-            onClick={() => techHandler(techno)}
-            style={{ fontSize: "2rem", margin: "1rem", cursor: "pointer" }}
-            key={techno}
+      <h1> 📚 book recommendation</h1>
+      <p style={{ fontSize: "smaller" }}>
+        Select the genres to see my recommendations
+      </p>
+      <div>
+        {Object.keys(list).map((grat) => (
+          <button
+            onClick={() => toshow(grat)}
+            style={{
+              height: "40px",
+              width: "200px",
+              margin: "40px"
+            }}
           >
-            {techno}
-          </span>
-        );
-      })}
-      <h2>{meaning}</h2>
+            {grat}
+          </button>
+        ))}
+      </div>
+      <hr />
+      <div style={{ textAlign: "left" }}>
+        <ul style={{ paddingInlineStart: "0.5rem" }}>
+          {list[name].map((book) => (
+            <li
+              key={book.name}
+              style={{
+                padding: "0.5rem 1rem",
+                margin: "0.5rem 1rem",
+                borderRadius: "0.5rem",
+                listStyle: "none",
+                width: "70%"
+              }}
+            >
+              <div style={{ fontSize: "larger" }}>{book.name}</div>
+              <div style={{ fontSize: "smaller" }}>{book.subjects}</div>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }
-export default App;
